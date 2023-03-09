@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import "./ProductList.css";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { Link, useNavigate } from "react-router-dom";
-import { clearError, getAdminProducts, deleteProduct } from "../../redux/actions/productActions";
-import { DELETE_PRODUCT_RESET } from "../../redux/constants/productConstants"
-import { Edit, Delete } from "@mui/icons-material"
-import { Button } from '@mui/material';
+import {
+  clearError,
+  getAdminProducts,
+  deleteProduct,
+} from "../../redux/actions/productActions";
+import { DELETE_PRODUCT_RESET } from "../../redux/constants/productConstants";
+import { Edit, Delete } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import SideBar from "./Sidebar";
 
 const ProductList = () => {
@@ -16,15 +20,28 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
 
-  const { error, products } = useSelector(state => state.products)
+  const { error, products } = useSelector((state) => state.products);
+  const { user } = useSelector(state => state.user)
+
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
   );
 
+  // console.log("User PRODUCTS", user);
+  // console.log("User PRODUCTS", user._id);
+
+  let Userproducts = [];
+  // let userProducts = products.find(({user}) => user = "64094f095886f436f9d2c9e9");
+  products.forEach((element) => {
+    //here id is your own id by which you want to compare against the json object
+    if (element.user == user._id) {
+      Userproducts.push(element);
+    }
+  });
 
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
-  }
+  };
 
   useEffect(() => {
     if (error) {
@@ -84,7 +101,9 @@ const ProductList = () => {
             </Link>
 
             <Button
-              onClick={() => deleteProductHandler(params.getValue(params.id, "id"))}
+              onClick={() =>
+                deleteProductHandler(params.getValue(params.id, "id"))
+              }
             >
               <Delete />
             </Button>
@@ -96,8 +115,8 @@ const ProductList = () => {
 
   const rows = [];
 
-  products &&
-    products.forEach((item) => {
+  Userproducts &&
+  Userproducts.forEach((item) => {
       rows.push({
         id: item._id,
         stock: item.stock,
@@ -127,7 +146,7 @@ const ProductList = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProductList
+export default ProductList;
