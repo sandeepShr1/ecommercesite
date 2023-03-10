@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import { TreeView, TreeItem } from "@material-ui/lab";
@@ -8,12 +8,22 @@ import {
       People, RateReview,
 } from "@mui/icons-material";
 import logo from "../../images/logo.png"
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllUsers } from '../../redux/actions/userActions';
 
 const Sidebar = () => {
+      const { user } = useSelector(state => state.user)
+
+      // const dispatch = useDispatch()
+      // useEffect(() => {
+      //       dispatch(getAllUsers())
+      // }, [dispatch]);
+
+      // console.log("USER",user.role)
       return (
             <div className="sidebar">
                   <Link to="/">
-                        <img src={logo} alt="Ecommerce" />
+                        <h2>SARAZ</h2>
                   </Link>
                   <Link to="/admin/dashboard">
                         <p>
@@ -42,11 +52,12 @@ const Sidebar = () => {
                               Orders
                         </p>
                   </Link>
-                  <Link to="/admin/users">
+                  {user.role != "seller" ?  <Link to="/admin/users">
                         <p>
                               <People /> Users
                         </p>
-                  </Link>
+                  </Link>:<></>}
+                 
                   <Link to="/admin/reviews">
                         <p>
                               <RateReview />

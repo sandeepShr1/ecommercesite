@@ -90,19 +90,19 @@ function App() {
         <Route path="/admin/dashboard" element={<Dashboard />} />
       </Route> */}
 
-          <Route path="/admin/dashboard" element={isAuthenticated && user.role === "admin" ? <Dashboard /> : <Login />} />
-          <Route path="/admin/products" element={isAuthenticated && user.role === "seller" || "admin" ? <ProductList /> : <Login />} />
-          <Route path="/admin/product/" element={isAuthenticated && user.role === "seller" || "admin" ? <NewProduct /> : <Login />} />
-          <Route path="/admin/product/:id" element={isAuthenticated && user.role === "seller" || "admin" ? <UpdateProduct /> : <Login />} />
-          <Route path="/admin/orders" element={isAuthenticated && user.role === "seller" || "admin" ? <OrderList /> : <Login />} />
-          <Route path="/admin/order/:id" element={isAuthenticated && user.role === "seller" || "admin" ? <UpdateOrder /> : <Login />} />
-          <Route path="/admin/users" element={isAuthenticated && user.role === "seller" || "admin" ? <Users /> : <Login />} />
-          <Route path="/admin/user/:id" element={isAuthenticated && user.role === "seller" || "admin" ? <UpdateUser /> : <Login />} />
-          <Route path="/admin/reviews" element={isAuthenticated && user.role === "seller" || "admin" ? <Reviews /> : <Login />} />
+          <Route path="/admin/dashboard" element={isAuthenticated && (user.role === "admin" || "seller") ? <Dashboard /> : <Login />} />
+          <Route path="/admin/products" element={isAuthenticated && user.role === "seller" ? <ProductList /> : <Login />} />
+          <Route path="/admin/product/" element={isAuthenticated && user.role === "seller" ? <NewProduct /> : <Login />} />
+          <Route path="/admin/product/:id" element={isAuthenticated && user.role === "seller" ? <UpdateProduct /> : <Login />} />
+          <Route path="/admin/orders" element={isAuthenticated && user.role === "seller" ? <OrderList /> : <Login />} />
+          <Route path="/admin/order/:id" element={isAuthenticated && user.role === "seller" ? <UpdateOrder /> : <Login />} />
+          <Route path="/admin/users" element={isAuthenticated && user.role === "admin" ? <Users /> : <Login />} />
+          <Route path="/admin/user/:id" element={isAuthenticated && user.role === "admin" ? <UpdateUser /> : <Login />} />
+          <Route path="/admin/reviews" element={isAuthenticated && user.role === "seller" ? <Reviews /> : <Login />} />
 
-          <Route path="/admin/banners" element={isAuthenticated && user.role === "seller" || "admin" ? <Banners /> : <Login />} />
-          <Route path="/admin/banner/" element={isAuthenticated && user.role === "seller" || "admin" ? <NewBanner /> : <Login />} />
-          <Route path="/admin/banner/:id" element={isAuthenticated && user.role === "seller" || "admin" ? <UpdateBanner /> : <Login />} />
+          <Route path="/admin/banners" element={isAuthenticated && user.role === "seller" ? <Banners /> : <Login />} />
+          <Route path="/admin/banner/" element={isAuthenticated && user.role === "seller" ? <NewBanner /> : <Login />} />
+          <Route path="/admin/banner/:id" element={isAuthenticated && user.role === "seller" ? <UpdateBanner /> : <Login />} />
         </Routes>
       </div>
       <Footer />

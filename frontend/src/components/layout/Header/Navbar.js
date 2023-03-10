@@ -38,7 +38,7 @@ const Navbar = () => {
 
                         <div className="navbar">
                               <p className="logo">
-                                    <Link to="/">DIGITAL MART</Link>
+                                    <Link to="/">SARAZ</Link>
                               </p>
                               <div onClick={handleClick} className="nav-icon">
                                     {open ? <CloseIcon /> : <MenuIcon />}

@@ -14,6 +14,8 @@ const Dashboard = () => {
       const { products } = useSelector(state => state.products);
       const { orderList } = useSelector(state => state.orderList);
       const { users } = useSelector(state => state.users);
+      const { user } = useSelector(state => state.user)
+
       const dispatch = useDispatch()
       useEffect(() => {
             dispatch(getAdminProducts())
@@ -54,6 +56,24 @@ const Dashboard = () => {
             ],
       };
 
+      let Userproducts = [];
+      // let userProducts = products.find(({user}) => user = "64094f095886f436f9d2c9e9");
+      products.forEach((element) => {
+        //here id is your own id by which you want to compare against the json object
+        if (element.user == user._id) {
+          Userproducts.push(element);
+        }
+      });
+      let userOrderList = [];
+      // let userOrderList = products.find(({user}) => user = "64094f095886f436f9d2c9e9");
+      orderList.forEach((element) => {
+        //here id is your own id by which you want to compare against the json object
+        if (element.user == user._id) {
+          userOrderList.push(element);
+        }
+      });
+
+      // console.log("ORDERLIST",orderList)
 
       return (
             <div className='dashboard'>
@@ -68,15 +88,16 @@ const Dashboard = () => {
                               <div className="dashboardSummaryBox2">
                                     <Link to="/admin/products" >
                                           <p>Products</p>
-                                          <p>{products && products.length}</p>
+                                          <p>{Userproducts && Userproducts.length}</p>
                                     </Link>
-                                    <Link to="/admin/users" >
+                                    {user.role === "admin" ? <Link to="/admin/users" >
                                           <p>Users</p>
                                           <p>{users && users.length}</p>
-                                    </Link>
+                                    </Link> : <></>}
+                                    
                                     <Link to="/admin/orders" >
                                           <p>Orders</p>
-                                          <p>{orderList && orderList.length}</p>
+                                          <p>{userOrderList && userOrderList.length}</p>
                                     </Link>
                               </div>
                         </div>
