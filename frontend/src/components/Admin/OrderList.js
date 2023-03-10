@@ -94,6 +94,13 @@ const OrderList = () => {
       },
     },
     {
+      field: "nameItem",
+      headerName: "Name",
+      type: "text",
+      minWidth: 150,
+      flex: 0.3,
+    },
+    {
       field: "itemsQty",
       headerName: "Items Qty",
       type: "number",
@@ -138,9 +145,16 @@ const OrderList = () => {
 
   const rows = [];
 
+  mergedArray.forEach((item) => {
+    item.orderItems.map((item1) => {});
+  });
+
   mergedArray &&
     mergedArray.forEach((item) => {
       rows.push({
+        nameItem: item.orderItems.map((item1) => {
+          return item1.name;
+        }),
         itemsQty: item.orderItems.length,
         id: item._id,
         status: item.orderStatus,
