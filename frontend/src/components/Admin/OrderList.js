@@ -66,15 +66,18 @@ const OrderList = () => {
   orderList.map((item1) => {
     console.log("ITEM", item1);
     item1.orderItems.map((order) => {
-      console.log("INSIDE LOOP",order)
-      if (order.product === "640aa5bdaac4bfb39c42c4f0") {
-        mergedArray.push(item1);
-      }
+      console.log("INSIDE LOOP", order);
+      Userproducts.map((product) => {
+        console.log("INSIDE LOOP 1", product);
+
+        if (order.product === product._id) {
+          mergedArray.push(item1);
+        }
+      });
     });
   });
 
   console.log("MERGED", mergedArray);
-
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
@@ -136,7 +139,7 @@ const OrderList = () => {
   const rows = [];
 
   mergedArray &&
-  mergedArray.forEach((item) => {
+    mergedArray.forEach((item) => {
       rows.push({
         itemsQty: item.orderItems.length,
         id: item._id,
