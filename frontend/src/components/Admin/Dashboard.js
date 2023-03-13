@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../../redux/actions/productActions";
 import { getOrderList } from "../../redux/actions/orderAction";
 import { getAllUsers } from "../../redux/actions/userActions";
-import {parse, stringify, toJSON, fromJSON} from 'flatted';
+import { parse, stringify, toJSON, fromJSON } from "flatted";
 
-const Dashboard = ({userRole}) => {
+const Dashboard = ({ userRole }) => {
   const { products } = useSelector((state) => state.products);
   const { orderList } = useSelector((state) => state.orderList);
   const { users } = useSelector((state) => state.users);
@@ -45,7 +45,6 @@ const Dashboard = ({userRole}) => {
     });
   });
 
-
   let totalAmount = 0;
   mergedArray &&
     mergedArray.forEach((item) => (totalAmount += item.totalPrice));
@@ -53,7 +52,6 @@ const Dashboard = ({userRole}) => {
   let totalProductAmount = 0;
   Userproducts &&
     Userproducts.forEach((item) => (totalProductAmount += item.price));
-
 
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
@@ -66,12 +64,9 @@ const Dashboard = ({userRole}) => {
       },
     ],
   };
-;
- 
-
   return (
     <div className="dashboard">
-      <Sidebar userRole={userRole}/>
+      <Sidebar userRole={userRole} />
 
       <div className="dashboardContainer">
         <Typography variant="h1">Dashboard</Typography>
@@ -110,18 +105,20 @@ const Dashboard = ({userRole}) => {
             </div>
           </>
         ) : (
-            <>
-              {" "}
-              <div className="dashboardSummary">
+          <>
+            {" "}
+            <div className="dashboardSummary">
+              <div className="dashboardSummaryBox2">
                 <Link to="/admin/users">
                   <p>Users</p>
                   <p>{users && users.length}</p>
                 </Link>
               </div>
-              {/* <div className="lineChart">
+            </div>
+            {/* <div className="lineChart">
                 <Line data={lineState} />
               </div> */}
-            </>
+          </>
         )}
         {/* <div className="doughnutChart">
                               <Doughnut data={doughnutState} />
