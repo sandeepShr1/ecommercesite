@@ -14,7 +14,7 @@ import MetaData from "../layout/MetaData";
 import { useNavigate } from "react-router-dom";
 import Loader from "../layout/Loader/Loader"
 
-const NewProduct = () => {
+const NewProduct = ({userRole}) => {
       const dispatch = useDispatch();
       const alert = useAlert();
       const history = useNavigate();
@@ -96,7 +96,7 @@ const NewProduct = () => {
                         <>
                               <MetaData title="Create Product" />
                               <div className="dashboard">
-                                    <Sidebar />
+                                    <Sidebar userRole={userRole}/>
                                     <div className="newProductContainer">
                                           <form
                                                 className="createProductForm"

@@ -13,7 +13,7 @@ import Loader from "../layout/Loader/Loader"
 import { EDIT_USER_RESET } from '../../redux/constants/userConstants';
 
 
-const UpdateUser = () => {
+const UpdateUser = ({userRole}) => {
       const dispatch = useDispatch();
       const alert = useAlert();
       const history = useNavigate();
@@ -68,7 +68,7 @@ const UpdateUser = () => {
                               <>
                                     <MetaData title="update User" />
                                     <div className="dashboard">
-                                          <Sidebar />
+                                          <Sidebar userRole={userRole}/>
                                           <div className="newProductContainer">
                                                 <form
                                                       className="createProductForm"

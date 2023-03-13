@@ -11,7 +11,7 @@ import { Delete, Star } from "@mui/icons-material"
 import { Button } from '@mui/material';
 import SideBar from "./Sidebar";
 
-const Reviews = () => {
+const Reviews = ({userRole}) => {
       const alert = useAlert();
       const dispatch = useDispatch();
       const history = useNavigate();
@@ -123,7 +123,7 @@ const Reviews = () => {
                   <MetaData title={`ALL REVIEWS - Admin`} />
 
                   <div className="dashboard">
-                        <SideBar />
+                        <SideBar userRole={userRole}/>
                         <div className="productReviewsContainer">
                               <form
                                     className="productReviewsForm"

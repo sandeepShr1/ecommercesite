@@ -16,7 +16,7 @@ import { Button } from "@mui/material";
 import SideBar from "./Sidebar";
 import { getAdminProducts } from "../../redux/actions/productActions";
 
-const OrderList = () => {
+const OrderList = ({userRole}) => {
   const { orderList, error } = useSelector((state) => state.orderList);
   const { products } = useSelector((state) => state.products);
   const { error: deleteError, isDeleted } = useSelector((state) => state.order);
@@ -167,7 +167,7 @@ const OrderList = () => {
       <MetaData title={`ALL Orders - Admin`} />
 
       <div className="dashboard">
-        <SideBar />
+        <SideBar userRole={userRole}/>
         <div className="productListContainer">
           <h1 id="productListHeading">ALL Orders</h1>
 

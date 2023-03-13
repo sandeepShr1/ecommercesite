@@ -14,7 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../layout/Loader/Loader"
 
 
-const UpdateProduct = () => {
+const UpdateProduct = ({userRole}) => {
       const dispatch = useDispatch();
       const alert = useAlert();
       const history = useNavigate();
@@ -116,7 +116,7 @@ const UpdateProduct = () => {
                               <>
                                     <MetaData title="update Product" />
                                     <div className="dashboard">
-                                          <Sidebar />
+                                          <Sidebar userRole={userRole}/>
                                           <div className="newProductContainer">
                                                 <form
                                                       className="createProductForm"

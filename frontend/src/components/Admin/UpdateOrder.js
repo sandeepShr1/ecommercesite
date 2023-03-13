@@ -13,7 +13,7 @@ import { useAlert } from "react-alert";
 import { Button } from '@mui/material';
 import { UPDATE_ORDERS_RESET } from '../../redux/constants/orderConstants';
 
-const UpdateOrder = () => {
+const UpdateOrder = ({userRole}) => {
       const { orderDetails, error, loading } = useSelector(state => state.orderDetails);
       const { error: updateError, isUpdated } = useSelector(state => state.order)
 
@@ -53,7 +53,7 @@ const UpdateOrder = () => {
                   <MetaData title={`Process Order`} />
 
                   <div className="dashboard">
-                        <SideBar />
+                        <SideBar userRole={userRole}/>
                         <div className="newProductContainer">
                               {loading ? (
                                     <Loader />

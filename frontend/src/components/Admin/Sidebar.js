@@ -16,7 +16,7 @@ import logo from "../../images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/actions/userActions";
 
-const Sidebar = () => {
+const Sidebar = ({userRole}) => {
   const { user } = useSelector((state) => state.user);
 
   // const dispatch = useDispatch()
@@ -25,6 +25,8 @@ const Sidebar = () => {
   // }, [dispatch]);
 
   // console.log("USER",user.role)
+  console.log("Sidebar",userRole)
+
   return (
     <div className="sidebar">
       <Link to="/">
@@ -35,11 +37,9 @@ const Sidebar = () => {
           <Dashboard /> Dashboard
         </p>
       </Link>
-      {user.role !== "seller" ? (
-        <></>
-      ) : (
+      {userRole === "seller" ? (
         <>
-          <div className="p">
+        <div className="p">
             <TreeView
               defaultCollapseIcon={<ExpandMore />}
               defaultExpandIcon={<ImportExport />}
@@ -56,23 +56,28 @@ const Sidebar = () => {
             </TreeView>
           </div>
         </>
-      )}
-
-      {user.role !== "seller" ? (
-        <></>
       ) : (
         <>
-          <Link to="/admin/orders">
+          
+        </>
+      )}
+
+      {userRole === "seller" ? (
+        <>
+         <Link to="/admin/orders">
             <p>
               <ListAlt />
               Orders
             </p>
-          </Link>
+          </Link></>
+      ) : (
+        <>
+         
         </>
       )}
 
       {
-        (user.role = "admin" ? (
+        (userRole === "admin" ? (
           <Link to="/admin/users">
             <p>
               <People /> Users
@@ -82,7 +87,7 @@ const Sidebar = () => {
           <></>
         ))
       }
-      {user.role !== "seller" ? (
+      {userRole !== "seller" ? (
         <></>
       ) : (
         <>
@@ -95,7 +100,7 @@ const Sidebar = () => {
           </Link>
         </>
       )}
-      {user.role !== "seller" ? (
+      {userRole !== "seller" ? (
         <></>
       ) : (
         <>

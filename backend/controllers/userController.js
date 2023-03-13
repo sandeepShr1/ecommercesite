@@ -48,6 +48,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
       if (!isPasswordMatched) {
             return next(new ErrorHandler("Invalid email or password", 401))
       }
+      console.log("User",user)
 
       sendToken(user, 200, res);
 

@@ -11,7 +11,7 @@ import { Button } from '@mui/material';
 import SideBar from "./Sidebar";
 import { DELETE_USER_RESET } from '../../redux/constants/userConstants';
 
-const Users = () => {
+const Users = ({userRole}) => {
       const { users, error } = useSelector(state => state.users);
       const { isDeleted, error: deleteError } = useSelector(state => state.profile);
       const dispatch = useDispatch();
@@ -112,7 +112,7 @@ const Users = () => {
                   <MetaData title={`ALL Users - Admin`} />
 
                   <div className="dashboard">
-                        <SideBar />
+                        <SideBar userRole={userRole}/>
                         <div className="productListContainer">
                               <h1 id="productListHeading">ALL Users</h1>
 

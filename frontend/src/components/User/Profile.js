@@ -15,6 +15,7 @@ const Profile = () => {
                   history("/login")
             }
       }, [history, isAuthenticated]);
+      // console.log(user)
 
       return (
             <>
@@ -36,6 +37,7 @@ const Profile = () => {
                                                 <h4>Email</h4>
                                                 <p>{user.email}</p>
                                           </div>
+                                          
                                           <div>
                                                 <h4>Joined On</h4>
                                                 <p>{String(user.createdAt).substring(0, 10)}</p>

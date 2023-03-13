@@ -15,7 +15,7 @@ import { Edit, Delete } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import SideBar from "./Sidebar";
 
-const ProductList = () => {
+const ProductList = ({userRole}) => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -125,12 +125,13 @@ const ProductList = () => {
       });
     });
 
+    console.log("productlist",userRole)
   return (
     <>
       <MetaData title={`ALL PRODUCTS - Admin`} />
 
       <div className="dashboard">
-        <SideBar />
+        <SideBar userRole={userRole}/>
         <div className="productListContainer">
           <h1 id="productListHeading">ALL PRODUCTS</h1>
 
