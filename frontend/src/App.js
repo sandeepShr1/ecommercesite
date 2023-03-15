@@ -42,6 +42,7 @@ import Banners from './components/Admin/Banner/Banners';
 import NewBanner from './components/Admin/Banner/NewBanner';
 import UpdateBanner from './components/Admin/Banner/UpdateBanner';
 import Loader from './components/layout/Loader/Loader';
+import SignupSeller from './components/User/SignupSeller';
 // const Home = React.lazy(() => import("./components/Home/Home"));
 const Products = React.lazy(() => import("./components/Product/Products"));
 const ProductDetails = React.lazy(() => import("./components/Product/ProductDetails"));
@@ -71,6 +72,7 @@ function App() {
           <Route exact path="/about" element={<About />} />
           <Route path="/products/:keyword" element={<Products />} />
           <Route exact path="/login" element={<LoginSignup />} />
+          <Route exact path="/registerSeller" element={<SignupSeller />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/password/reset/:token" element={<ResetPassword />} />

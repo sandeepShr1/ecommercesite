@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import "./LoginSignup.css";
+import "./SignupSeller.css";
 import { Link, useNavigate } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -9,24 +9,17 @@ import { login, clearError, register } from "../../redux/actions/userActions";
 import { useAlert } from "react-alert"
 import Loader from "../layout/Loader/Loader"
 
-const LoginSignup = () => {
+const SignupSeller = () => {
 
       const { loading, error, isAuthenticated } = useSelector((state) => state.user)
       const dispatch = useDispatch();
       const history = useNavigate();
 
-      const loginTab = useRef(null);
-      const registerTab = useRef(null);
-      const switcherTab = useRef(null);
-
-      const [loginEmail, setLoginEmail] = useState("");
-      const [loginPassword, setLoginPassword] = useState("");
-
       const [user, setUser] = useState({
             name: "",
             email: "",
             password: "",
-            role:"user"
+            role:"seller"
       });
 
       const alert = useAlert();
@@ -36,11 +29,6 @@ const LoginSignup = () => {
       const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
 
-      const loginSubmit = (e) => {
-            e.preventDefault();
-            dispatch(login(loginEmail, loginPassword))
-      }
-
       const registerSubmit = (e) => {
             e.preventDefault();
 
@@ -49,9 +37,9 @@ const LoginSignup = () => {
             myForm.set("email", email);
             myForm.set("password", password);
             myForm.set("avatar", avatar);
-            myForm.set("avatar", avatar);
             myForm.set("role", role);
             dispatch(register(myForm))
+            // console.log('User',user)
       }
 
       const registerDataChange = (e) => {
@@ -85,61 +73,15 @@ const LoginSignup = () => {
                   history(redirect);
             }
       }, [dispatch, error, alert, history, isAuthenticated, redirect]);
-      const switchTabs = (e, tab) => {
-            if (tab === "login") {
-                  switcherTab.current.classList.add("shiftToNeutral");
-                  switcherTab.current.classList.remove("shiftToRight");
-
-                  registerTab.current.classList.remove("shiftToNeutralForm");
-                  loginTab.current.classList.remove("shiftToLeft");
-            }
-            if (tab === "register") {
-                  switcherTab.current.classList.add("shiftToRight");
-                  switcherTab.current.classList.remove("shiftToNeutral");
-
-                  registerTab.current.classList.add("shiftToNeutralForm");
-                  loginTab.current.classList.add("shiftToLeft");
-            }
-      };
+      
 
       return (
             <>
                   {loading ? <Loader /> : (
                         <div className="LoginSignUpContainer">
                               <div className="LoginSignUpBox">
-                                    <div>
-                                          <div className="login_signUp_toggle">
-                                                <p onClick={(e) => switchTabs(e, "login")}>Login</p>
-                                                <p onClick={(e) => switchTabs(e, "register")}>Register</p>
-                                          </div>
-                                          <button ref={switcherTab}></button>
-                                    </div>
-                                    <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
-                                          <div className="loginEmail">
-                                                <MailOutlineIcon />
-                                                <input type="email"
-                                                      placeholder='Email'
-                                                      required
-                                                      value={loginEmail}
-                                                      onChange={(e) => setLoginEmail(e.target.value)}
-                                                />
-                                          </div>
-                                          <div className="loginPassword">
-                                                <LockOpenIcon />
-                                                <input type="password"
-                                                      placeholder='Password'
-                                                      required
-                                                      value={loginPassword}
-                                                      onChange={(e) => setLoginPassword(e.target.value)}
-                                                />
-                                          </div>
-                                          <Link to="/password/forgot">Forget Password ?</Link>
-                                          <input type="submit" value="Login" className='loginBtn' />
-                                    </form>
-
                                     <form
-                                          className="signUpForm"
-                                          ref={registerTab}
+                                          className="signupSection"
                                           encType="multipart/form-data"
                                           onSubmit={registerSubmit}
                                     >
@@ -195,4 +137,4 @@ const LoginSignup = () => {
       )
 }
 
-export default LoginSignup;
+export default SignupSeller;
