@@ -80,6 +80,7 @@ const SignupSeller = () => {
                   {loading ? <Loader /> : (
                         <div className="LoginSignUpContainer">
                               <div className="LoginSignUpBox">
+                                <h2 style={{textAlign:"center"}}>WELCOME! BECOME A SELLER</h2>
                                     <form
                                           className="signupSection"
                                           encType="multipart/form-data"
