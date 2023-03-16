@@ -28,6 +28,8 @@ const ProductDetails = () => {
       const { success, error: reviewError } = useSelector(
             (state) => state.newReview
       );
+      const { isAuthenticated, user } = useSelector((state) => state.user);
+
 
       const dispatch = useDispatch();
       const options = {
@@ -51,7 +53,7 @@ const ProductDetails = () => {
       }
 
       const addToCartHandler = () => {
-            dispatch(addToCart(id, quantity));
+            dispatch(addToCart(id, quantity,user._id));
             alert.success("Item Added To Cart.")
       }
 
