@@ -100,7 +100,7 @@ const Sidebar = ({userRole}) => {
           </Link>
         </>
       )}
-      {userRole !== "seller" ? (
+      {userRole !== "admin" ? (
         <></>
       ) : (
         <>

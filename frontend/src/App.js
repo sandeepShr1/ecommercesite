@@ -102,9 +102,9 @@ function App() {
           <Route path="/admin/user/:id" element={isAuthenticated && user.role === "admin" ? <UpdateUser userRole={user.role}/> : <Login />} />
           <Route path="/admin/reviews" element={isAuthenticated && user.role === "seller" ? <Reviews userRole={user.role}/> : <Login />} />
 
-          <Route path="/admin/banners" element={isAuthenticated && user.role === "seller" ? <Banners userRole={user.role}/> : <Login />} />
-          <Route path="/admin/banner/" element={isAuthenticated && user.role === "seller" ? <NewBanner userRole={user.role}/> : <Login />} />
-          <Route path="/admin/banner/:id" element={isAuthenticated && user.role === "seller" ? <UpdateBanner userRole={user.role}/> : <Login />} />
+          <Route path="/admin/banners" element={isAuthenticated && user.role === "admin" ? <Banners userRole={user.role}/> : <Login />} />
+          <Route path="/admin/banner/" element={isAuthenticated && user.role === "admin" ? <NewBanner userRole={user.role}/> : <Login />} />
+          <Route path="/admin/banner/:id" element={isAuthenticated && user.role === "admin" ? <UpdateBanner userRole={user.role}/> : <Login />} />
         </Routes>
       </div>
       <Footer />
