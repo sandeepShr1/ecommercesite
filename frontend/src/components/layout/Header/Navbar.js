@@ -101,9 +101,9 @@ const Navbar = () => {
                   to="/cart"
                 >
                   <ShoppingCartIcon />
-                  <span className="cart-item-qty">
+                  {/* <span className="cart-item-qty">
                     {cartItems && cartItems.length}
-                  </span>
+                  </span> */}
                 </NavLink>
               ) : (
                 <NavLink

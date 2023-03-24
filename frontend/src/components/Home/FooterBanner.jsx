@@ -37,9 +37,9 @@ const FooterBanner = () => {
                               </Link>
                         </div>
 
-                        <img
+                        {/* <img
                               src={banners[0]?.images[0]?.url} className="footer-banner-image" alt="footerImg"
-                        />
+                        /> */}
                   </div>
             </div>
       )
