@@ -24,7 +24,7 @@ const Cart = () => {
     }
   }, [user]);
 
-  
+
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -50,16 +50,13 @@ const Cart = () => {
     history("/login?redirect=shipping");
   };
 
-  console.log("user",userDetails);
-  console.log("cart",cartItems);
   let userCart = [];
-  cartItems.forEach((item) =>{
-      if (item.userId === userDetails._id){
-            userCart.push(item);
-      }
+  cartItems.forEach((item) => {
+    if (item.userId === userDetails._id) {
+      userCart.push(item);
+    }
   })
 
-  console.log("Cart",userCart)
 
   return (
     <>
@@ -78,63 +75,64 @@ const Cart = () => {
           ) : (
             <>
               <div className="cartPage">
-                    <div className="cartHeader">
-                      <p>Product</p>
-                      <p>Quantity</p>
-                      <p>SubTotal</p>
-                    </div>
+                <div className="cartHeader">
+                  <p>Product</p>
+                  <p>Quantity</p>
 
-                    {userCart &&
-                      userCart.map((item) => {
-                        return (
-                          <div key={item.product} className="cartContainer">
-                            <CartItemCard
-                              item={item}
-                              deleteFromCart={deleteFromCart}
-                            />
-                            <div className="cartInput">
-                              <button
-                                onClick={() =>
-                                  decreaseQuantity(item.product, item.quantity)
-                                }
-                              >
-                                -
-                              </button>
-                              <span>{item.quantity}</span>
-                              <button
-                                onClick={() =>
-                                  increaseQuantity(
-                                    item.product,
-                                    item.quantity,
-                                    item.stock
-                                  )
-                                }
-                              >
-                                +
-                              </button>
-                            </div>
-                            <p className="cartSubtotal">{`रू${
-                              item.price * item.quantity
-                            }`}</p>
-                          </div>
-                        );
-                      })}
+                  <p>SubTotal</p>
+                </div>
 
-                    <div className="cartGrossTotal">
-                      <div></div>
-                      <div className="cartGrossTotalBox">
-                        <p>Gross Total</p>
-                        <p>{`रू${userCart.reduce(
-                          (acc, item) => acc + item.quantity * item.price,
-                          0
-                        )}`}</p>
+                {userCart &&
+                  userCart.map((item) => {
+                    return (
+                      <div key={item.product} className="cartContainer">
+                        <CartItemCard
+                          item={item}
+                          deleteFromCart={deleteFromCart}
+                        />
+                        <div className="cartInput">
+                          <button
+                            onClick={() =>
+                              decreaseQuantity(item.product, item.quantity)
+                            }
+                          >
+                            -
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button
+                            onClick={() =>
+                              increaseQuantity(
+                                item.product,
+                                item.quantity,
+                                item.stock
+                              )
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+
+                        <p className="cartSubtotal">{`रू${item.price * item.quantity
+                          }`}</p>
                       </div>
-                      <div></div>
-                      <div className="checkOutBtn">
-                        <button onClick={checkoutHandler}>Check Out</button>
-                      </div>
-                    </div>
+                    );
+                  })}
+
+                <div className="cartGrossTotal">
+                  <div></div>
+                  <div className="cartGrossTotalBox">
+                    <p>Gross Total</p>
+                    <p>{`रू${userCart.reduce(
+                      (acc, item) => acc + item.quantity * item.price,
+                      0
+                    )}`}</p>
                   </div>
+                  <div></div>
+                  <div className="checkOutBtn">
+                    <button onClick={checkoutHandler}>Check Out</button>
+                  </div>
+                </div>
+              </div>
             </>
           )}
         </>

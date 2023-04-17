@@ -9,6 +9,8 @@ const cartItemCard = ({ item, deleteFromCart }) => {
                   <div>
                         <Link to={`/product/${item.product}`}>{item.name}</Link>
                         <span>{`Price: Rs${item.price}`}</span>
+                        <span style={{textTransform:"uppercase"}}>{`Size: ${item.size}`}</span>
+
                         <p onClick={() => deleteFromCart(item.product)} >Remove</p>
                   </div>
             </div>

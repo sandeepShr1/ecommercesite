@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom"
-import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
+import { SpeedDial, SpeedDialAction } from "@mui/lab";
 import { Dashboard, Person, ExitToApp, ListAlt } from "@mui/icons-material";
 import { useAlert } from "react-alert";
 import { logout } from '../../../redux/actions/userActions';

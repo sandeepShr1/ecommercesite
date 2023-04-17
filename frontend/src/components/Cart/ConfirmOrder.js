@@ -7,21 +7,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 const ConfirmOrder = () => {
-      // const [loading, setLoading] = useState(true);
-      // const [userDetails, setuserDetails] = useState({});
+  // const [loading, setLoading] = useState(true);
+  // const [userDetails, setuserDetails] = useState({});
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const history = useNavigate();
 
-//   useEffect(() => {
-//       if (user !== undefined) {
-//         setLoading(false);
-//         setuserDetails(user);
-//       }
-//     }, [user]);
+  //   useEffect(() => {
+  //       if (user !== undefined) {
+  //         setLoading(false);
+  //         setuserDetails(user);
+  //       }
+  //     }, [user]);
 
-    
+
   let userCart = [];
   cartItems.forEach((item) => {
     if (item.userId === user._id) {
@@ -33,9 +33,9 @@ const ConfirmOrder = () => {
     0
   );
 
-  const shippingCharges = subtotal > 1000 ? 0 : 200;
+  const shippingCharges = 50;
 
-  const tax = subtotal * 0.18;
+  const tax = 0;
 
   const totalPrice = subtotal + tax + shippingCharges;
 
@@ -88,6 +88,7 @@ const ConfirmOrder = () => {
                     <Link to={`/product/${item.product}`}>
                       {item.name}
                     </Link>{" "}
+                    <span>{item?.size}</span>
                     <span>
                       {item.quantity} X रू{item.price} ={" "}
                       <b>रू{item.price * item.quantity}</b>

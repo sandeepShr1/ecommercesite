@@ -44,14 +44,21 @@ const MyOrders = () => {
                   headerName: "Items Qty",
                   type: "number",
                   minWidth: 150,
-                  flex: 0.3,
+                  flex: 0.5,
+            },
+            {
+                  field: "size",
+                  headerName: "Size",
+                  // type: "number",
+                  minWidth: 150,
+                  flex: 0.5,
             },
 
             {
                   field: "amount",
                   headerName: "Amount",
                   type: "number",
-                  minWidth: 270,
+                  minWidth: 200,
                   flex: 0.5,
             },
 
@@ -75,10 +82,12 @@ const MyOrders = () => {
 
       orders &&
             orders.forEach((item, index) => {
+                  console.log(item)
                   rows.push({
                         itemsQty: item.orderItems.length,
                         id: item._id,
                         status: item.orderStatus,
+                        size: item?.orderItems?.[0]?.size,
                         amount: item.totalPrice,
                   });
             });

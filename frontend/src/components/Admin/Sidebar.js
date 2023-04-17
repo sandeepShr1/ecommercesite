@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
-import { TreeView, TreeItem } from "@material-ui/lab";
+import { TreeView, TreeItem } from "@mui/lab";
 import {
   ExpandMore,
   PostAdd,
@@ -16,7 +16,7 @@ import logo from "../../images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/actions/userActions";
 
-const Sidebar = ({userRole}) => {
+const Sidebar = ({ userRole }) => {
   const { user } = useSelector((state) => state.user);
 
   // const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const Sidebar = ({userRole}) => {
   // }, [dispatch]);
 
   // console.log("USER",user.role)
-  console.log("Sidebar",userRole)
+  console.log("Sidebar", userRole)
 
   return (
     <div className="sidebar">
@@ -39,7 +39,7 @@ const Sidebar = ({userRole}) => {
       </Link>
       {userRole === "seller" ? (
         <>
-        <div className="p">
+          <div className="p">
             <TreeView
               defaultCollapseIcon={<ExpandMore />}
               defaultExpandIcon={<ImportExport />}
@@ -58,13 +58,13 @@ const Sidebar = ({userRole}) => {
         </>
       ) : (
         <>
-          
+
         </>
       )}
 
       {userRole === "seller" ? (
         <>
-         <Link to="/admin/orders">
+          <Link to="/admin/orders">
             <p>
               <ListAlt />
               Orders
@@ -72,7 +72,7 @@ const Sidebar = ({userRole}) => {
           </Link></>
       ) : (
         <>
-         
+
         </>
       )}
 

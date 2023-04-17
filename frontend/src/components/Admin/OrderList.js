@@ -16,7 +16,7 @@ import { Button } from "@mui/material";
 import SideBar from "./Sidebar";
 import { getAdminProducts } from "../../redux/actions/productActions";
 
-const OrderList = ({userRole}) => {
+const OrderList = ({ userRole }) => {
   const { orderList, error } = useSelector((state) => state.orderList);
   const { products } = useSelector((state) => state.products);
   const { error: deleteError, isDeleted } = useSelector((state) => state.order);
@@ -58,26 +58,43 @@ const OrderList = ({userRole}) => {
     dispatch(getAdminProducts());
   }, [dispatch, alert, error, deleteError, isDeleted, history]);
 
-  console.log("Userproducts", Userproducts);
-  console.log("Producut", orderList);
 
   //MERGE:
   let mergedArray = [];
-  orderList.map((item1) => {
-    console.log("ITEM", item1);
-    item1.orderItems.map((order) => {
-      console.log("INSIDE LOOP", order);
+  const newProd = [];
+
+  // orderList.map((item1) => {
+
+  //   item1?.orderItems.map((order) => {
+  //     Userproducts.map((product) => {
+
+  //       if (order.product === product._id) {
+  //         newProd.push(order);
+  //         console.log(newProd, "inside")
+  //       }
+  //     });
+
+  //   });
+  //   console.log(newProd, "ouside")
+  //   mergedArray.push({ ...item1, orderItems: newProd })
+  // });
+
+  // console.log("MERGED", mergedArray);
+
+  let newarrayorder = [];
+  let obj = {}
+  orderList?.map((orderlist) => {
+    let newlist = [];
+    orderlist?.orderItems?.map((order) => {
       Userproducts.map((product) => {
-        console.log("INSIDE LOOP 1", product);
-
         if (order.product === product._id) {
-          mergedArray.push(item1);
+          newlist.push(order);
         }
-      });
-    });
+      })
+    })
+    obj = { ...orderlist, orderItems: newlist }
+    newarrayorder.push(obj);
   });
-
-  console.log("MERGED", mergedArray);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
@@ -101,10 +118,17 @@ const OrderList = ({userRole}) => {
       flex: 0.3,
     },
     {
+      field: "size",
+      headerName: "Size",
+      type: "text",
+      minWidth: 100,
+      flex: 0.3,
+    },
+    {
       field: "itemsQty",
       headerName: "Items Qty",
       type: "number",
-      minWidth: 150,
+      minWidth: 100,
       flex: 0.3,
     },
 
@@ -112,7 +136,7 @@ const OrderList = ({userRole}) => {
       field: "amount",
       headerName: "Amount",
       type: "number",
-      minWidth: 270,
+      minWidth: 200,
       flex: 0.5,
     },
 
@@ -145,34 +169,39 @@ const OrderList = ({userRole}) => {
 
   const rows = [];
 
-  mergedArray.forEach((item) => {
-    item.orderItems.map((item1) => {});
-  });
+  // newarrayorder.forEach((item) => {
+  //   item.orderItems.map((item1) => { });
+  // });
+  console.log(newarrayorder)
 
-  mergedArray &&
-    mergedArray.forEach((item) => {
+  newarrayorder &&
+    newarrayorder.filter(n => n.orderItems.length > 0).forEach((item) => {
       rows.push({
         nameItem: item.orderItems.map((item1) => {
           return item1.name;
         }),
-        itemsQty: item.orderItems.length,
+        itemsQty: item?.orderItems?.reduce((a, c) => a + (Number(c.quantity)), 0),
         id: item._id,
         status: item.orderStatus,
-        amount: item.totalPrice,
+        size: item.orderItems.map((item1) => {
+          return item1.size;
+        }),
+        amount: item?.orderItems?.reduce((a, c) => a + (Number(c.price) * Number(c.quantity)), 0),
       });
     });
+
 
   return (
     <>
       <MetaData title={`ALL Orders - Admin`} />
 
       <div className="dashboard">
-        <SideBar userRole={userRole}/>
+        <SideBar userRole={userRole} />
         <div className="productListContainer">
           <h1 id="productListHeading">ALL Orders</h1>
 
           <DataGrid
-            rows={rows}
+            rows={rows || []}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
